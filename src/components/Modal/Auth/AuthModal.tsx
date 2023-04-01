@@ -8,34 +8,56 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
+  Flex,
 } from "@chakra-ui/react";
 
 import React, { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { authModalState } from "../../../atoms/authModalAtom";
+import AuthInputs from "./AuthInputs";
 
 type AuthModalProps = {};
 
-const AuthModal: React.FC<AuthModalProps> = () => { 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const AuthModal: React.FC<AuthModalProps> = () => {
+  const [modalState, setModalState] = useRecoilState(authModalState);
+
+  const handleClose = () => {
+    setModalState((prev) => ({
+      ...prev,
+      open: false,
+    }));
+  };
+
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={modalState.open} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader textAlign="center">
+            {modalState.view === "login" && "Login"}
+            {modalState.view === "signup" && "Sign Up"}
+            {modalState.view === "resetPassword" && "Reset Password "}
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-           
-            hello
-          </ModalBody>
+          <ModalBody
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Flex
+              direction="column"
+              align="center"
+              justify="center"
+              width="70%"
+              pb={6}
+            >
+                {/* <OAuthButtons/> */}
+                <AuthInputs/>
+                {/* <ResetPassword/> */}
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
+            </Flex>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </>
