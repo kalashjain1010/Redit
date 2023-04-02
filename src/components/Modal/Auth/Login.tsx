@@ -3,9 +3,9 @@ import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { authModalState } from "../../../atoms/authModalAtom";
 
-// import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-// import { auth } from "@/firebase/clientApp";
-// import { FIREBASE_ERRORS } from "../../../firebase/errors";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "../../../firebase/clientApp";
+import { FIREBASE_ERRORS } from "../../../firebase/errors";
 
 const Login: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
@@ -13,17 +13,17 @@ const Login: React.FC = () => {
     email: "",
     password: "",
   });
-  // const [
-  //   signInWithEmailAndPassword,
-  //   user,
-  //   loading,
-  //   error,
-  // ] = useSignInWithEmailAndPassword(auth);
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
 
   const onSubmit =(event: React.FormEvent<HTMLFormElement>) =>{
     event.preventDefault();
 
-    // signInWithEmailAndPassword(loginForm.email,loginForm.password)
+    signInWithEmailAndPassword(loginForm.email,loginForm.password)
   }
 
   const onChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
       />
 
       <Text textAlign={"center"} color="red" fontSize={"10pt"}>
-        {/* {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]} */}
+        {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
       <Button
         width="100%"
@@ -90,7 +90,7 @@ const Login: React.FC = () => {
         mb={2}
         mt={2}
         type="submit"
-        // isLoading={loading}
+        isLoading={loading}
       >
         Log In
       </Button>
@@ -103,12 +103,12 @@ const Login: React.FC = () => {
           fontSize={"9pt"}
           color="blue.500"
           cursor={"pointer"}
-          // onClick={() =>
-          //   setAuthModalState((prev)=>({
-          //      ...prev,
-          //      view:"resetPassword"
-          //   }))
-          // }
+          onClick={() =>
+            setAuthModalState((prev)=>({
+               ...prev,
+               view:"resetPassword"
+            }))
+          }
         >
           reset
         </Text>

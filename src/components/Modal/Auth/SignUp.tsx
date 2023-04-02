@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
-import { authModalState, ModalView } from "@/atoms/authModalAtom";
+// import { authModalState, ModalView } from "@/atoms/authModalAtom";
 import { useSetRecoilState } from "recoil";
-// import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-// import { auth, firestore } from "../../../firebase/clientApp";
-// import { FIREBASE_ERRORS } from "../../../firebase/errors";
-// import { addDoc, collection } from "firebase/firestore";
-// import { User } from "@firebase/auth";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth, firestore } from "../../../firebase/clientApp";
+import { FIREBASE_ERRORS } from "../../../firebase/errors";
+import { addDoc, collection } from "firebase/firestore";
+import { User } from "@firebase/auth";
+import { authModalState } from "../../../atoms/authModalAtom";
 
 const SignUp: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
@@ -18,8 +19,8 @@ const SignUp: React.FC = () => {
 
   const [error, setError] = useState("");
 
-  // const [createUserWithEmailAndPassword, user, loading, UserError] =
-  //   useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading, userError] =
+    useCreateUserWithEmailAndPassword(auth);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,7 +29,7 @@ const SignUp: React.FC = () => {
       setError("passwords do not match");
       return;
     }
-    // createUserWithEmailAndPassword(SignUpForm.email, SignUpForm.password);
+    createUserWithEmailAndPassword(SignUpForm.email, SignUpForm.password);
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,17 +39,18 @@ const SignUp: React.FC = () => {
     }));
   };
 
-    // const createuserDocument = async( user : User) =>{
-    //   await addDoc(collection(firestore, 'users') , JSON.parse(JSON.stringify(user)) )
-    // } 
+  const createuserDocument = async (user: User) => {
+    await addDoc(
+      collection(firestore, "users"),
+      JSON.parse(JSON.stringify(user))
+    );
+  };
 
-    // useEffect(() => {
-    //   if (user) {
-    //     createuserDocument(user.user)
-    //   }
-    
-    // }, [user])
-    
+  useEffect(() => {
+    if (user) {
+      createuserDocument(user.user);
+    }
+  }, [user]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -116,11 +118,14 @@ const SignUp: React.FC = () => {
         }}
         bg="gray.50"
       />
+
      
-        <Text textAlign={"center"} color="red" fontSize={"10pt"}>
-          {/* {error ||
-            FIREBASE_ERRORS[UserError?.message as keyof typeof FIREBASE_ERRORS]} */}
-        </Text>
+          <Text textAlign={"center"} color="red" fontSize={"10pt"}>
+            {error ||
+              FIREBASE_ERRORS[
+                userError?.message as keyof typeof FIREBASE_ERRORS
+              ]}
+          </Text>
       
       <Button
         width="100%"
