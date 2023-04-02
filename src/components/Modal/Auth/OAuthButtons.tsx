@@ -9,19 +9,19 @@ import { auth, firestore } from "../../../firebase/clientApp";
 type OAuthButtonsProps = {};
 
 const OAuthButtons: React.FC = () => {
-  const[signInWithGoogle, user , loading , error] =useSignInWithGoogle(auth);
+  const[signInWithGoogle, userCred , loading , error] =useSignInWithGoogle(auth);
 
-//   const createuserDocument = async( user : User) =>{
-//     const userDocRef = doc(firestore, "users" , user.uid)
-//     await setDoc(userDocRef,JSON.parse(JSON.stringify(user)) )
-//   } 
+  const createuserDocument = async( user : User) =>{
+    const userDocRef = doc(firestore, "users" , user.uid)
+    await setDoc(userDocRef,JSON.parse(JSON.stringify(user)) )
+  } 
 
-//   useEffect(() => {
-//     if (user) {
-//       createuserDocument(user.user)
-//     }
+  useEffect(() => {
+    if (userCred) {
+      createuserDocument(userCred.user)
+    }
   
-//   }, [user])
+  }, [userCred])
   
 
   return (

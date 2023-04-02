@@ -19,7 +19,7 @@ const SignUp: React.FC = () => {
 
   const [error, setError] = useState("");
 
-  const [createUserWithEmailAndPassword, user, loading, userError] =
+  const [createUserWithEmailAndPassword, userCred, loading, userError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -47,10 +47,10 @@ const SignUp: React.FC = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      createuserDocument(user.user);
+    if (userCred) {
+      createuserDocument(userCred.user);
     }
-  }, [user]);
+  }, [userCred]);
 
   return (
     <form onSubmit={onSubmit}>
