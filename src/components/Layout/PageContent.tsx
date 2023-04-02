@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{PropsWithChildren} from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
 interface PageContentLayoutProps {
@@ -7,7 +7,7 @@ interface PageContentLayoutProps {
 }
 
 // Assumes array of two children are passed
-const PageContent: React.FC = ({children}) => {
+const PageContent: React.FC<PropsWithChildren>= ({children}) => {
   console.log("here is children and unki moomy", children)
   return (
     <Flex justify="center" p="16px 0px">
