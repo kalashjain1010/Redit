@@ -41,7 +41,10 @@ const useCommunityData = () => {
        }))
 
       console.log("here is kalash k snippets", snippets)
-    } catch (error) {}
+    } catch (error) {
+        console.log("getMySnippet error",error)
+    }
+    setLoading(false);
   };
 
   const joinCommunity = (communityData: Community) => {};
@@ -55,6 +58,7 @@ const useCommunityData = () => {
   return {
     communityStateValue,
     onJoinOrLeaveCommunity,
+    loading,
   };
 };
 
