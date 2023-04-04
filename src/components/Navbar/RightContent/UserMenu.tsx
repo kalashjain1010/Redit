@@ -37,6 +37,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     resetCommunityState();
     //clear community state
   }
+  
   return (
     <>
       <Menu>
@@ -97,7 +98,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                 fontSize={"10pt"}
                 fontWeight="700"
                 _hover={{ bg: "blue.500", color: "white" }}
-                onClick={() => signOut(auth)}
+                onClick={logout}
               >
                 <Flex align={"center"}>
                   <Icon fontSize={20} mr="2" as={MdOutlineLogin} />
