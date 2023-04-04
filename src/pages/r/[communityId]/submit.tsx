@@ -2,8 +2,10 @@ import React from 'react'
 
 type Props = {}
 
-export default function submit({}: Props) {
+function submitPostPage({}: Props) {
   return (
-    <div>submit</div>
+    <div>submitPostPage</div>
   )
 }
+
+export default submitPostPage
