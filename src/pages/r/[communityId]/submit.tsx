@@ -4,10 +4,14 @@ import { Box, Text } from "@chakra-ui/react";
 import NewPostForm from "../../../components/Community/Posts/NewPostForm";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../firebase/clientApp";
+import { useRecoilValue } from "recoil";
+import { communityState } from "../../../atoms/communitiesAtom";
 
 const submitPostPage: React.FC = () => {
   const [user] = useAuthState(auth);
-
+  const communityStateValue = useRecoilValue(communityState);
+  console.log("community", communityStateValue);
+  
   return (
     <PageContent>
       <>

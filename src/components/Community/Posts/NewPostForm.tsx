@@ -27,6 +27,7 @@ import {
 } from "firebase/firestore";
 import { firestore, storage } from "../../../firebase/clientApp";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import useSelectFile from "../../../hooks/useSelectFile";
 
 type Props = {
   user: User;
@@ -67,7 +68,8 @@ const NewPostForm: React.FC<Props> = ({ user }) => {
     body: "",
   });
 
-  const [selectedFile, setSelectedFile] = useState<string>();
+  // const [selectedFile, setSelectedFile] = useState<string>();
+  const {selectedFile, setSelectedFile , onSelectFile} = useSelectFile();
   const [error, setError] = useState(false);
   const handleCreatePost = async () => {
     const { communityId } = router.query;
@@ -105,19 +107,19 @@ const NewPostForm: React.FC<Props> = ({ user }) => {
 
   };
 
-  const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
+  // const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const reader = new FileReader();
 
-    if (event.target.files?.[0]) {
-      reader.readAsDataURL(event.target.files[0]);
-    }
+  //   if (event.target.files?.[0]) {
+  //     reader.readAsDataURL(event.target.files[0]);
+  //   }
 
-    reader.onload = (readerEvent) => {
-      if (readerEvent.target?.result) {
-        setSelectedFile(readerEvent.target.result as string);
-      }
-    };
-  };
+  //   reader.onload = (readerEvent) => {
+  //     if (readerEvent.target?.result) {
+  //       setSelectedFile(readerEvent.target.result as string);
+  //     }
+  //   };
+  // };
   const onTextChange = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -150,7 +152,7 @@ const NewPostForm: React.FC<Props> = ({ user }) => {
         {selectedTab === "Images & Video" && (
           <ImageUpload
             selectedFile={selectedFile}
-            onSelectImage={onSelectImage}
+            onSelectImage={onSelectFile}
             setSelectedTab={setSelectedTab}
             setSelectedFile={setSelectedFile}
           />
