@@ -14,6 +14,10 @@ import {
 import { Flex, Icon, Stack, Text, Image, Skeleton, Spinner, Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
 import moment from "moment";
 import { useSetRecoilState } from "recoil";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../firebase/clientApp";
+import { useRouter } from 'next/router'
+import Login from "../../Modal/Auth/Login";
 // import Image from "next/image";
 
 type PostItemProps = {
@@ -33,6 +37,7 @@ const PostItem: React.FC<PostItemProps> = ({
   onDeletePost,
   onSelectPost,
 }) => {
+ 
   const [loadingImage, setLoadingImage] = useState(true);
   const [error, setError] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false)
