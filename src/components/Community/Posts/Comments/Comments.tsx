@@ -1,11 +1,12 @@
 import { User } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { Post } from "../../../../atoms/postsAtom";
+import { Post, postState } from "../../../../atoms/postsAtom";
 import { Box, Flex, Icon } from "@chakra-ui/react";
 import { FaReddit } from "react-icons/fa";
 import CommentInput from "./CommentInput";
 import { Timestamp, collection, doc, increment, serverTimestamp, writeBatch } from "firebase/firestore";
 import { firestore } from "../../../../firebase/clientApp";
+import { useSetRecoilState } from "recoil";
 
 type CommentsProps = {
   user: User;
@@ -33,6 +34,7 @@ const Comments: React.FC<CommentsProps> = ({
   const [comments, setComments] = useState<Comment[]>([]);
   const [fetchLoading, setFetchLoading] = useState(false);
   const [createLoading, setCreateLoading] = useState(false);
+  const setPostState = useSetRecoilState(postState);
 
   const onCreateComment = async (commentText: string) => {
 
@@ -67,6 +69,13 @@ const Comments: React.FC<CommentsProps> = ({
       //update client recoil state
       setCommentText("");
       setComments((prev)=> [newComment, ...prev])
+      setPostState(prev => ({
+        ...prev,
+        selectedPost:{
+          ...prev.selectedPost,
+          numberOfComments: prev.selectedPost?.numberOfComments! +1
+        }as Post
+      }))
 
 } catch (error) {
   console.log("onCreateComment error", error);
