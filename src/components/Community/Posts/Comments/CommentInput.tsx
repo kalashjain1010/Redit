@@ -1,4 +1,4 @@
-import { Flex, Textarea, Button, Text } from '@chakra-ui/react';
+import { Flex, Textarea, Button, Text, Box } from '@chakra-ui/react';
 import { User } from 'firebase/auth';
 import React from 'react'
 import AuthButtons from '../../../Navbar/RightContent/AuthButtons';
@@ -22,6 +22,8 @@ const CommentInput:React.FC<CommentInputProps> = ({commentText, setCommentText,u
               {user?.email?.split("@")[0]}
             </span>
           </Text>
+        <Box>
+
           <Textarea
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
@@ -29,6 +31,7 @@ const CommentInput:React.FC<CommentInputProps> = ({commentText, setCommentText,u
             fontSize="10pt"
             borderRadius={4}
             minHeight="160px"
+            
             pb={10}
             _placeholder={{ color: "gray.500" }}
             _focus={{
@@ -36,7 +39,11 @@ const CommentInput:React.FC<CommentInputProps> = ({commentText, setCommentText,u
               bg: "white",
               border: "1px solid black",
             }}
-          />
+            ></Textarea>
+            </Box>
+          {/* //9.6 */}
+          <Box >
+
           <Flex
             position="absolute"
             left="1px"
@@ -46,16 +53,18 @@ const CommentInput:React.FC<CommentInputProps> = ({commentText, setCommentText,u
             bg="gray.100"
             p="6px 8px"
             borderRadius="0px 0px 4px 4px"
-          >
+            >
+            
+          </Flex>
             <Button
               height="26px"
               disabled={!commentText.length}
               isLoading={createLoading}
               onClick={() => onCreateComment(commentText)}
-            >
+              >
               Comment
             </Button>
-          </Flex>
+              </Box>
         </>
       ) : (
         <Flex
