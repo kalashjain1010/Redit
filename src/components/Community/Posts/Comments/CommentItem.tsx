@@ -17,13 +17,12 @@ import {
 } from "react-icons/io5";
 
 export type Comment = {
-  id?: string;
-  creatorId: string;
+  id: string;
+  creatotId: string;
   creatorDisplayText: string;
-  creatorPhotoURL: string;
   communityId: string;
-  postId: string;
   postTitle: string;
+  postId: string;
   text: string;
   createdAt: Timestamp;
 };
@@ -61,49 +60,40 @@ const CommentItem: React.FC<CommentItemProps> = ({
   return (
     <Flex>
       <Box mr={2}>
-        <Icon as={FaReddit} fontSize={30} color="gray.300" />
+        <Icon as={FaReddit} fontSize={30} color={"gray.300"} />
       </Box>
       <Stack spacing={1}>
-        <Stack direction="row" align="center" spacing={2} fontSize="8pt">
-          <Text
-            // fontWeight={700}
-            // _hover={{ textDecoration: "underline", cursor: "pointer" }}
-          >
-            {comment.creatorDisplayText}
+        <Stack direction={"row"} align={"center"} fontSize={"8pt"}>
+          <Text fontWeight={700}>{comment.creatorDisplayText}</Text>
+          <Text color={"gray.600"}>
+            {moment(new Date(comment.createdAt.seconds * 1000)).fromNow()}
           </Text>
-          {/* {comment.createdAt?.seconds && ( */}
-            <Text color="gray.600">
-              {moment(new Date(comment.createdAt?.seconds * 1000)).fromNow()}
-            </Text>
-          {/* ) */}
-          {/* } */}
-          {/* {loadingDelete && <Spinner size="sm" />} */}
+          {loadingDelete && <Spinner size={"sm"} />}
         </Stack>
-        {/* <Text fontSize="10pt">{comment.text}</Text>
+        <Text fontSize={"10pt"}>{comment.text}</Text>
         <Stack
-          direction="row"
-          align="center"
-          cursor="pointer"
-          fontWeight={600}
-          color="gray.500"
+          direction={"row"}
+          align={"center"}
+          cursor={"pointer"}
+          color={"gray.500"}
         >
           <Icon as={IoArrowUpCircleOutline} />
           <Icon as={IoArrowDownCircleOutline} />
-          {userId === comment.creatorId && (
+          {userId === comment.creatotId && (
             <>
-              <Text fontSize="9pt" _hover={{ color: "blue.500" }}>
+              <Text fontSize={"9pt"} _hover={{ color: "blue.500" }}>
                 Edit
               </Text>
               <Text
-                fontSize="9pt"
+                fontSize={"9pt"}
                 _hover={{ color: "blue.500" }}
                 onClick={() => onDeleteComment(comment)}
               >
-                Delete
+                delete
               </Text>
             </>
           )}
-        </Stack> */}
+        </Stack>
       </Stack>
     </Flex>
   );
