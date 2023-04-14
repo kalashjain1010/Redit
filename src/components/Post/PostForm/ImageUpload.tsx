@@ -8,7 +8,7 @@ type ImageUploadProps = {
   selectFileRef: React.RefObject<HTMLInputElement>;
   onSelectImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
-//to upload images
+
 const ImageUpload: React.FC<ImageUploadProps> = ({
   selectedFile,
   setSelectedFile,
