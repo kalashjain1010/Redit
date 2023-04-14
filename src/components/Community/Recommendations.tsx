@@ -60,6 +60,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
       borderColor="gray.300"
     >
       <Flex
+        marginTop={"25px"}
         align="flex-end"
         color="white"
         p="6px 10px"
