@@ -1,7 +1,7 @@
 
 
 
-## Tech Stack
+## Technology used
 
 **Client:** React,Next.js,Chakra-UI Redux, Styled-Components
 
