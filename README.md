@@ -33,3 +33,6 @@ Start the server
 ```bash
   npm run dev
 ```
+
+also you need to make an account on firebase and update your local env file
+
