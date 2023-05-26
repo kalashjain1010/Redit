@@ -77,7 +77,6 @@ const Home: NextPage = () => {
          * queryResults is an array of length 3, each with 0-2 posts from
          * 3 communities that the user has joined
          * /
-         
          */
         queryResults.forEach((result) => {
           const posts = result.docs.map((doc) => ({
