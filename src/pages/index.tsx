@@ -112,7 +112,7 @@ const Home: NextPage = () => {
 
       // if not in any, get 5 communities ordered by number of members
       // for each one, get 2 posts ordered by voteStatus and set these to postState posts
-      /
+      
     } catch (error: any) {
       console.log("getUserHomePosts error", error.message);
     }
