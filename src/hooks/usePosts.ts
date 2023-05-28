@@ -82,7 +82,6 @@ const usePosts = (communityData?: Community) => {
 
         console.log("NEW VOTE!!!", newVote);
 
-        // APRIL 25 - DON'T THINK WE NEED THIS
         // newVote.id = postVoteRef.id;
 
         batch.set(postVoteRef, newVote);
@@ -148,11 +147,6 @@ const usePosts = (communityData?: Community) => {
       };
       // }
 
-      /**
-       * Optimistically update the UI
-       * Used for single page view [pid]
-       * since we don't have real-time listener there
-       */
       if (updatedState.selectedPost) {
         updatedState = {
           ...updatedState,
@@ -160,7 +154,6 @@ const usePosts = (communityData?: Community) => {
         };
       }
 
-      // Optimistically update the UI
       setPostStateValue(updatedState);
 
       // Update database
