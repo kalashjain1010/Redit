@@ -47,7 +47,6 @@ const useCommunityData = (ssrCommunityData?: boolean) => {
   };
 
   const getCommunityData = async (communityId: string) => {
-    // this causes weird memory leak error - not sure why
     // setLoading(true);
     console.log("GETTING COMMUNITY DATA");
 
@@ -182,10 +181,9 @@ const useCommunityData = (ssrCommunityData?: boolean) => {
         getCommunityData(community as string);
         return;
       }
-      // console.log("this is happening", communityStateValue);
+   
     } else {
       /**
-       * JUST ADDED THIS APRIL 24
        * FOR NEW LOGIC OF NOT USING visitedCommunities
        */
       setCommunityStateValue((prev) => ({

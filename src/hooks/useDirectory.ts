@@ -61,7 +61,7 @@ const useDirectory = () => {
       selectedMenuItem: defaultMenuItem,
     }));
   }, [communityStateValue.currentCommunity]);
-  //                              ^ used to be communityStateValue.vistedCommunities
+  // used to be communityStateValue.vistedCommunities
 
   return { directoryState, onSelectMenuItem, toggleMenuOpen };
 };
