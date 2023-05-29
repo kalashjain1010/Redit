@@ -12,7 +12,7 @@ const Layout: React.FC <PropsWithChildren> = ({children}) => {
 
   return (
     <>
-      //no
+      
       <Navbar/>
       <Box paddingTop={"50px"}>
 
